@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>base</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-default fixed-top">
+      <a class="navbar-brand" href="#">Ask CATS
+         <img src="images/cat_main.png" style="width:64px;">
+      </a>
+      <form class="form-inline mt-2 mt-md-0 ml-auto mr-auto">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div class ='ml-auto'>
+        <img src='images/profile.jpg' class='inline' style="width: 52px">
+        <div class = 'inline'>
+         <h4 class ='profile_box'>Jackie</h4>
+         <div class="navbar-right-links">
+           <a class="nav-link inline profile_box" href="#">settings</a>
+           <a class="nav-link inline profile_box" href="#">log out</a>
+         </div>
+       </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main" class="flex-shrink-0" >
+    <div class="container">
+      <div class="row">
+       <div class="col-9" style='position: absolute; left: 0;'>
+    
+          <div class="card" style='margin-top: 20px; margin-bottom: 32px;'>
+            <div class="card-body row">
+              <div class="col-3">
+                <img src='images/cat1.jpg' style="width: 100px">
+                <div class='likes block' style='margin-top: 10px'>
+                 <h6 class='inline'>3 </h6>
+                 <img src='images/like.png'  class='inline' style="width: 20px">
+                </div>
+              </div>
+              <div class="col-9">
+                <h5 class="card-title" style='color: #880E4F'><b>Where did the cats appear?</b></h5>
+                <p class="card-text" style='color: #880E4F'>I wonder where our first relatives from</p>
+                <div class='card-tags'>
+                  <h6 class='inline'>Tags: </h6>
+                  <a href="#" class="card-link inline ">history</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="card" style='margin-top: 20px;'>
+            <div class="card-body row">
+              <div class="col-3">
+                <img src='images/profile.jpg' style="width: 80px">
+                <div class='likes block' style='margin-top: 10px'>
+                 <h6 class='inline'>3 </h6>
+                 <img src='images/like.png'  class='inline' style="width: 20px">
+                </div>
+              </div>
+              <div class="col-9">
+                <p class="card-text">Today, it’s believed that wildcats started living with humans in the Middle East’s Fertile Crescent. This is an area of fertile land along the Tigris and Euphrates rivers.</p>
+                <input type='checkbox' class='inline'/> <h5 href="#" class="inline">correct</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style='margin-top: 20px;'>
+            <div class="card-body row">
+              <div class="col-3">
+                <img src='images/cat2.jpg' style="width: 80px">
+                <div class='likes block' style='margin-top: 10px'>
+                 <h6 class='inline'>3 </h6>
+                 <img src='images/like.png'  class='inline' style="width: 20px">
+                </div>
+              </div>
+              <div class="col-9">
+                <p class="card-text">The cat family can trace their genealogy back to ancient
+Cyprus and Egypt. Unlike the domestication of the dog, pack
+animals with a built-in cooperative instinct, the full
+domestication of the cat (about 4,000 years ago) was not so
+easily achieved.</p>
+                <input type='checkbox' class='inline'/> <h5 href="#" class="inline">correct</h5>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <textarea  maxlength="200" class='inline text_edit' style='height: 200px;'> </textarea>
+          <input class='add-answer-button' type="submit" value="Answer" style='margin-bottom: 30px;' />
+
+       </div>
+       <div class="col-3 tags" style='position: absolute; right: 0;'>
+          <h2 class="border_bar_header" style='margin-top: 32px;'>Popular tags</h2>
+          <div>
+            <h4>Meow</h3>
+            <h4>meoW</h3>
+            <h4>murr</h3>
+            <h4>murmur</h3>
+          </div>
+          <h2 class="border_bar_header" style='margin-top: 32px;'>Best Members</h2>
+          <div>
+            <h4>Pushok</h3>
+            <h4>Tomas</h3>
+            <h4>Vasya</h3>
+            <h4>Bagi</h3>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+
+
+</body>
+</html>

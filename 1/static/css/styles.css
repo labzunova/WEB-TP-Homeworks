@@ -1,0 +1,109 @@
+.inline{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.block{
+  display: block;
+}
+
+.navbar-right-links{
+  margin-top: -16px;
+}
+
+main{
+  margin-top: 100px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-default {
+	color: #FBE9E7;
+  background-color: #FBE9E7;
+  border-color: #4FC3F7;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #880E4F;
+}
+
+.navbar-brand{
+  font-size: 32px;
+  color: #212121;
+}
+
+.navbar-user{
+  text-align: center;
+  height: 100;
+}
+
+.profile_box{
+	color: #212121;
+	text-align: center;
+}
+
+.border_bar_header{
+	color: #4E342E
+}
+
+.tags{
+	text-align: center;
+}
+
+.card-tags{
+  float: right;
+}
+
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+table {
+  border-spacing: 8px 20px;
+}
+
+.title{
+  font-size: 48px;
+}
+
+.input_text{
+  font-size: 24px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.text_edit{
+  width: 400px;
+}
+
+.add-question-button{
+  height: 80px;
+  width: 160px;
+  color:  #212121;
+  font-size: 24px;
+  background-color: #FBE9E7;
+  margin-top: 32px;
+}
+
+.add-answer-button{
+  height: 40px;
+  width: 80px;
+  color:  #212121;
+  font-size: 16px;
+  background-color: #FBE9E7;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+

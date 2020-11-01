@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>base</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-default fixed-top">
+      <a class="navbar-brand" href="#">Ask CATS
+         <img src="images/cat_main.png" style="width:64px;">
+      </a>
+      <form class="form-inline mt-2 mt-md-0 ml-auto mr-auto">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div class ='ml-auto'>
+         <h4 class ='profile_box'>Welcome!</h4>
+         <div class="navbar-right-links">
+           <a class="nav-link inline profile_box" href="#">sign up</a>
+           <a class="nav-link inline profile_box" href="#">log in</a>
+         </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main" class="flex-shrink-0" >
+    <div class="container">
+      <div class="row">
+       <div class="col-9" style='position: absolute; left: 80px;'>
+           <h2 class='title' colspan='2' style='margin-top: 20px;'>Sign up</h2>
+            <div>
+              <h3 class='inline input_text'>Login</h3> <input type='text' maxlength="50" class='inline text_edit'/>
+            </div>
+            <div>
+              <h3 class='inline input_text'>Email</h3> <input type='text' maxlength="50" class='inline text_edit'/>
+            </div>
+            <div>
+              <h3 class='inline input_text'>NickName</h3> <input type='text' maxlength="50" class='inline text_edit'/>
+            </div>
+            <div>
+              <h3 class='inline input_text'>Password</h3> <input type='password' maxlength="30" class='inline text_edit'/>
+            </div>
+            <div>
+              <h3 class='inline input_text'>Repeat password</h3> <input type='password' maxlength="30" class='inline text_edit'/>
+            </div>
+            <div>
+              <h3 class='inline input_text'>Upload avatar</h3>
+              <input type='text' maxlength="30" class='inline text_edit'/>
+              <input class='inline add-answer-button' type="submit" value="choose" style='margin-top: 0; margin-left: 32px;' />
+            </div>
+            <input class='add-question-button' type="submit" value="Register!" />
+       </div>
+       <div class="col-3 tags" style='position: absolute; right: 0;'>
+          <h2 class="border_bar_header" style='margin-top: 32px;'>Popular tags</h2>
+          <div>
+            <h4>Meow</h3>
+            <h4>meoW</h3>
+            <h4>murr</h3>
+            <h4>murmur</h3>
+          </div>
+          <h2 class="border_bar_header" style='margin-top: 32px;'>Best Members</h2>
+          <div>
+            <h4>Pushok</h3>
+            <h4>Tomas</h3>
+            <h4>Vasya</h3>
+            <h4>Bagi</h3>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+
+
+</body>
+</html>
