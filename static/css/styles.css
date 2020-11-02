@@ -90,7 +90,7 @@ table {
 
 .add-question-button{
   height: 80px;
-  width: 160px;
+  width: 144px;
   color:  #212121;
   font-size: 24px;
   background-color: #FBE9E7;
@@ -107,3 +107,7 @@ table {
   margin-bottom: 32px;
 }
 
+table{
+   border-collapse: separate;
+   border-spacing: 8px 16px; 
+}

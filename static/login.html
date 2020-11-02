@@ -19,14 +19,11 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <div class ='ml-auto'>
-        <img src='images/profile.jpg' class='inline' style="width: 52px">
-        <div class = 'inline'>
-         <h4 class ='profile_box'>Jackie</h4>
+         <h4 class ='profile_box'>Welcome!</h4>
          <div class="navbar-right-links">
-           <a class="nav-link inline profile_box" href="#">settings</a>
-           <a class="nav-link inline profile_box" href="#">log out</a>
+           <a class="nav-link inline profile_box" href="#">sign up</a>
+           <a class="nav-link inline profile_box" href="#">log in</a>
          </div>
-       </div>
       </div>
     </nav>
   </header>
@@ -35,21 +32,32 @@
     <div class="container">
       <div class="row">
        <div class="col-9" style='position: absolute; left: 80px;'>
-            <h2 class='title' colspan='2' style='margin-top: 20px;'>New Question</h2>
-            <div>
-              <h3 class='inline input_text'>Title</h3> <input type='text' maxlength="50" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Text</h3> <textarea  maxlength="200" class='inline text_edit' style='height: 200px;'> </textarea>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Tags</h3> <input type='text' maxlength="30" class='inline text_edit'/>
-            </div>
-            <input class='add-question-button' type="submit" value="ASK!" />
-
+          <h2 class='title inline' colspan='2' style='margin-top: 20px;'>Log in</h2>
+          <h4 class='inline' style='color:red; margin-left:32px;'>Wrong login or password!</h4>
+          <table>
+          <tbody>
+          <tr>
+            <td>Login</td>
+            <td>
+              <input type='text' maxlength="50" class='inline text_edit'/>
+            </td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td>
+            <input type='password' maxlength="30" class='inline text_edit'/>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="2">
+            <input class='add-answer-button' type="submit" value="Log in!" />
+            <a href="#" style='margin-left: 16px;'>Create new account</a>
+            </td>
+         </tr>
+        </tbody>
+        </table>
+      
        </div>
-
-
        <div class="col-3 tags" style='position: absolute; right: 0;'>
           <h2 class="border_bar_header" style='margin-top: 32px;'>Popular tags</h2>
           <div>

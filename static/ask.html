@@ -19,11 +19,14 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <div class ='ml-auto'>
-         <h4 class ='profile_box'>Welcome!</h4>
+        <img src='images/profile.jpg' class='inline' style="width: 52px">
+        <div class = 'inline'>
+         <h4 class ='profile_box'>Jackie</h4>
          <div class="navbar-right-links">
-           <a class="nav-link inline profile_box" href="#">sign up</a>
-           <a class="nav-link inline profile_box" href="#">log in</a>
+           <a class="nav-link inline profile_box" href="#">settings</a>
+           <a class="nav-link inline profile_box" href="#">log out</a>
          </div>
+       </div>
       </div>
     </nav>
   </header>
@@ -32,29 +35,40 @@
     <div class="container">
       <div class="row">
        <div class="col-9" style='position: absolute; left: 80px;'>
-           <h2 class='title' colspan='2' style='margin-top: 20px;'>Sign up</h2>
-            <div>
-              <h3 class='inline input_text'>Login</h3> <input type='text' maxlength="50" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Email</h3> <input type='text' maxlength="50" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>NickName</h3> <input type='text' maxlength="50" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Password</h3> <input type='password' maxlength="30" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Repeat password</h3> <input type='password' maxlength="30" class='inline text_edit'/>
-            </div>
-            <div>
-              <h3 class='inline input_text'>Upload avatar</h3>
-              <input type='text' maxlength="30" class='inline text_edit'/>
-              <input class='inline add-answer-button' type="submit" value="choose" style='margin-top: 0; margin-left: 32px;' />
-            </div>
-            <input class='add-question-button' type="submit" value="Register!" />
+            <h2 class='title' colspan='2' style='margin-top: 20px;'>New Question</h2>
+
+
+          <table>
+          <tbody>
+          <tr>
+            <td>Title</td>
+            <td>
+              <input type='text' maxlength="50" class='inline text_edit'/>
+            </td>
+          </tr>
+          <tr>
+            <td>Text</td>
+            <td>
+             <textarea  maxlength="200" class='inline text_edit' style='height: 200px;'> </textarea>
+            </td>
+         </tr>
+         <tr>
+            <td>Tags</td>
+            <td>
+            <input type='text' maxlength="30" class='inline text_edit'/>
+            </td>
+            <td style='color:red'> maximum is 3 tags</td>
+         </tr>
+         <tr>
+            <td colspan="2">
+            <input class='add-question-button' type="submit" value="ASK!"/>
+            </td>
+         </tr>
+         </tbody>
+        </table>
        </div>
+
+
        <div class="col-3 tags" style='position: absolute; right: 0;'>
           <h2 class="border_bar_header" style='margin-top: 32px;'>Popular tags</h2>
           <div>
