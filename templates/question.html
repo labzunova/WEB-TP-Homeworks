@@ -1,0 +1,45 @@
+{% extends 'inc/base.html' %}
+{% load static %}
+
+    {% block is_authorized %}
+        {% include 'inc/navbar_authorized.html' %}
+    {% endblock is_authorized %}
+
+
+        {% block content %}
+          <div class="card" style='margin-top: 20px; margin-bottom: 32px; border-color: #880E4F'>
+            <div class="card-body row">
+              <div class="col-3">
+                <img src='{% static "images/cat1.jpg" %}' style="width: 100px">
+                <div class='likes block' style='margin-top: 10px'>
+                 <h6 class='inline'>3 </h6>
+                 <img src='{% static "images/like.png" %}'  class='inline' style="width: 20px">
+                </div>
+              </div>
+              <div class="col-9">
+                <h1>{{question.title}} </h1>
+                <h5 class="card-title" style='color: #880E4F'><b>Where did the cats appear?</b></h5>
+                <p class="card-text" style='color: #880E4F'>I wonder where our first relatives from</p>
+                <div class='card-tags'>
+                  <h6 class='inline'style='margin-top: 7px;'>Tags: </h6>
+                  <a href="{% url 'askcats_index_by_tag' 'paws' %}" class="card-link inline ">paws</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          {% for answer in answers %}
+            {% include 'inc/one_answer.html' %}
+          {% endfor %}
+          <hr>
+          <textarea  maxlength="200" class='inline text_edit' style='height: 100px;'> </textarea>
+          <input class='add-answer-button' type="submit" value="Answer" style='margin-bottom: 30px;' />
+          <hr>
+      {% endblock content %}
+
+
+  {% block pagination %}
+   {% include 'inc/pagination.html' %}
+  {% endblock pagination %}
+

@@ -1,0 +1,43 @@
+<div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first &nbsp; </a>
+            <a href="?page={{ page_obj.previous_page_number }}"> previous&nbsp;</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}&nbsp;
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> next&nbsp;</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a>
+        {% endif %}
+</div>
+
+<!--nav class="higher">
+    <ul class="pagination">
+    	<h1>ssdf</h1>
+        {% if objects.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">1</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ objects.previous_page_number }}">&laquo;</a>
+        </li>
+        {% endif %}
+   
+        <li class="page-item disabled">
+            <a class="page-link" href="#">{{objects.number}}</a>
+        </li>
+
+        {% if objects.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{objects.next_page_number}}">&raquo;</a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" href="?page={{objects.paginator.num_pages}}">{{objects.paginator.num_pages}}</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>-->

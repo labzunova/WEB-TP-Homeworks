@@ -1,0 +1,16 @@
+{% load static %}
+<div class="card" style='margin-top: 20px;'>
+	<div class="card-body row">
+		<div class="col-3">
+			<img src='{% static "images/profile.jpg" %}' style="width: 80px">
+			<div class='likes block' style='margin-top: 10px'>
+				<h6 class='inline'>3 </h6>
+				<img src='{% static "images/like.png" %}'  class='inline' style="width: 20px">
+			</div>
+		</div>
+		<div class="col-9">
+			<p class="card-text">{{answer.text}}</p>
+			<input type='checkbox' class='inline'/> <h5 href="#" class="inline">correct</h5>
+		</div>
+	</div>
+</div>

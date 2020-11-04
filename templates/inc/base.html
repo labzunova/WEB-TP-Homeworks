@@ -1,0 +1,53 @@
+<!doctype html>
+{% load static %}
+<html lang="ru" class="h-100">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <title>base</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    {% block is_authorized %}
+    {% endblock is_authorized %}
+
+  <main role="main" class="flex-shrink-0">
+    <div class="container">
+      <div class="row">
+
+         <div class="col-9"  style='position: absolute; left: 0; bottom:40; margin-left: 15px; margin-top: 30px;'>
+            {% block content %}
+            {% endblock content %}
+            <div style='margin: 64px 0 40px 16px; font-size: 24px;'>
+             {% block pagination %}
+             {% endblock pagination %}
+            </div>
+         </div>
+
+         <div class="col-3 tags"  style='position: absolute; right: 0; margin-top: 30px;'>
+          {% block right %}
+            <h2 class="border_bar_header"style='margin-top: 32px;'>Popular tags</h2>
+            <div style='font-size: 24px;'>
+              <a href="{% url 'askcats_index_by_tag' 'paws' %}" class="block">paws</a>
+              <a href="{% url 'askcats_index_by_tag' 'food' %}" class="block ">food</a>
+              <a href="{% url 'askcats_index_by_tag' 'humans' %}" class="block">humans</a>
+              <a href="{% url 'askcats_index_by_tag' 'everyday' %}" class="block">everyday</a>
+            </div>
+            <h2 class="border_bar_header" style='margin-top: 32px;'>Best Members</h2>
+            <div>
+              <h4>Pushok</h3>
+              <h4>Tomas</h3>
+              <h4>Vasya</h3>
+              <h4>Jessie</h3>
+            </div>
+          {% endblock right %}
+         </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

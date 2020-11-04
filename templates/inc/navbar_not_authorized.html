@@ -1,0 +1,19 @@
+{% load static %}
+  <header>
+    <nav class="navbar navbar-expand-md navbar-default fixed-top">
+      <a class="navbar-brand" href="{% url 'askcats_index' %}">Ask CATS
+         <img src='{% static "images/cat_main.png" %}' style="width:64px;">
+      </a>
+      <form class="form-inline mt-2 mt-md-0 ml-auto mr-auto">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <div class ='ml-auto'>
+         <h4 class ='profile_box'>Welcome!</h4>
+         <div class="navbar-right-links">
+           <a class="nav-link inline profile_box" href="{% url 'askcats_signup' %}">sign up</a>
+           <a class="nav-link inline profile_box" href="{% url 'askcats_login' %}">log in</a>
+         </div>
+      </div>
+    </nav>
+  </header>
