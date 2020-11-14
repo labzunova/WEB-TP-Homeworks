@@ -18,11 +18,12 @@
               </div>
               <div class="col-9">
                 <h1>{{question.title}} </h1>
-                <h5 class="card-title" style='color: #880E4F'><b>Where did the cats appear?</b></h5>
-                <p class="card-text" style='color: #880E4F'>I wonder where our first relatives from</p>
+                <h5 class="card-title" style='color: #880E4F'><b>{{question.text}}</b></h5>
                 <div class='card-tags'>
                   <h6 class='inline'style='margin-top: 7px;'>Tags: </h6>
-                  <a href="{% url 'askcats_index_by_tag' 'paws' %}" class="card-link inline ">paws</a>
+                  {% for tag in question.tags.all %}
+                    <a href="{% url 'askcats_index_by_tag' tag.title %}" class="badge badge-pill  badge-warning">{{ tag.title }}</a>
+                  {% endfor %}
                 </div>
               </div>
             </div>

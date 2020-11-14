@@ -28,6 +28,9 @@ class QuestionManager(models.Manager):
     def new_questions(self):
         return self.order_by('-date_create')
 
+    def tag_questions(self, tag):
+        return self.filter(tags__title=tag)
+
     class Meta:
         verbose_name = 'User'
         
