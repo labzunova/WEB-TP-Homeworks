@@ -4,17 +4,22 @@
     <div class="col-3">
       <img src="{% static 'images/profile.jpg' %}" style="width: 80px">
       <div class='likes block' style='margin-top: 10px'>
-       <h6 class='inline'>{{question.users_rating}} </h6>
+       <a class='inline'>- </a>
+       <h6 class='inline'>{{question.rating}} </h6>
        <img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px">
+       <a class='inline'> +</a>
      </div>
    </div>
    <div class="col-9">
     <h5 class="card-title">{{question.title}}</h5>
     <p class="card-text">{{question.text}}</p>
-    <a href="#" class="card-link">answer({{question.number_of_answers}})</a>
+    <a href="#" class="card-link">answer()</a>
     <div class='card-tags'>
       <h6 class='inline' style='margin-top: 7px;'>Tags: </h6>
-      <a href="{% url 'askcats_index_by_tag' 'paws' %}" class="card-link inline ">{{question.tags}}</a>
+      {% for tag in question.tags.all %}
+                 <a href="{% url 'askcats_index_by_tag' tag.title %}" class="badge badge-pill  badge-warning">{{ tag.title }}</a>
+      {% endfor %}
+    </a>
     </div>
   </div>
 </div>

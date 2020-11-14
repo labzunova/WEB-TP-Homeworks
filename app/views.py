@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import random
 from django.core.paginator import Paginator
+from app.models import Question
 
 def paginate(request, object_list, per_page=5):
     paginator = Paginator(object_list, 5)
@@ -27,11 +28,17 @@ answers = [
 ]
 
 def index(request):
+    questions = Question.objects.new_questions()
     page_obj = paginate(request, questions)
     return render(request,'index.html', {'questions':questions, 'page_obj': page_obj})
     
+def index_hot(request):
+    questions = Question.objects.best_questions()
+    page_obj = paginate(request, questions)
+    return render(request,'index.html', {'questions':questions, 'page_obj': page_obj})
+       
 def index_by_tag(request, tag):
-    questions_ = questions
+    questions_ = questions.best_questions()
     new = []
     for i in range(10):
     	if questions_[i]['tags'] == tag:
