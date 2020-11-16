@@ -13,7 +13,7 @@
    <div class="col-9">
     <h5 class="card-title">{{question.title}}</h5>
     <p class="card-text">{{question.text}}</p>
-    <a href="#" class="card-link">answer()</a>
+    <a href="{% url 'askcats_question' question.identificator %}" class="card-link">answer({{question.answers_count}})</a>
     <div class='card-tags'>
       <h6 class='inline' style='margin-top: 7px;'>Tags: </h6>
       {% for tag in question.tags.all %}
