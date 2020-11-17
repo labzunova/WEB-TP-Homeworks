@@ -4,6 +4,9 @@
   <a class="navbar-brand" href="{% url 'askcats_index' %}">Ask CATS
   <img src='{% static "images/cat_main.png" %}' style="width:64px;">
   </a>
+  <form action="{% url 'askcats_ask' %}" target="_blank">
+   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ask!</button>
+  </form>
   <form class="form-inline mt-2 mt-md-0 ml-auto mr-auto">
     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
