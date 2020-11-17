@@ -26,8 +26,8 @@ def index_hot(request):
 
 def index_by_tag(request, tag):
     questions_ = Question.objects.questions_by_tag(tag)
-    paginate(request, questions_)
-    return render(request, 'index.html', {'questions': questions_})
+    page_obj = paginate(request, questions_)
+    return render(request, 'index.html', {'questions': questions_, 'page_obj': page_obj})
 
 
 def ask(request):
