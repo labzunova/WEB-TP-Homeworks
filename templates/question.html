@@ -11,9 +11,12 @@
             <div class="card-body row">
               <div class="col-3">
                 <img src='{% static "images/cat1.jpg" %}' style="width: 100px">
+                <h6 class='block'>{{question.user.name}}</h6>
                 <div class='likes block' style='margin-top: 10px'>
-                 <h6 class='inline'>3 </h6>
-                 <img src='{% static "images/like.png" %}'  class='inline' style="width: 20px">
+                 <a class='inline'>- </a>
+                 <h6 class='inline'>{{question.rating}} </h6>
+                 <img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px">
+                 <a class='inline'> +</a>
                 </div>
               </div>
               <div class="col-9">

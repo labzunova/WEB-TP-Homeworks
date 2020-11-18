@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Author(models.Model):
-    #avatar = models.ImageField(default='askсats/static/images/test.jpg')
+    avatar = models.ImageField(default='askсats/static/images/test.jpg')
 
     class Meta:
         verbose_name = 'Доп. инфа о пользователе'
@@ -11,10 +11,18 @@ class Author(models.Model):
 
 
 class User(models.Model):
-    name = models.CharField(max_length=32, default='', verbose_name='Имя')
+    identificator = models.IntegerField(verbose_name='id юзера', default=0)
+    name = models.CharField(max_length=50, default='', verbose_name='Имя')
     password = models.CharField(max_length=32, default='', verbose_name='Пароль')
-    email = models.EmailField(max_length=32, default='', verbose_name='E-mail')
+    email = models.EmailField(max_length=50, default='', verbose_name='E-mail')
     author = models.OneToOneField(Author, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Юзер'
+        verbose_name_plural = 'Юзеры'
 
 
 class Tag(models.Model):
@@ -45,11 +53,11 @@ class QuestionManager(models.Manager):
 class Question(models.Model):
     identificator = models.IntegerField(verbose_name='id вопроса', default=0)
     rating = models.IntegerField(default=0, verbose_name='рейтинг вопроса')
-    answers_count = models.IntegerField(default=0, verbose_name='количество вопросов')
+    answers_count = models.IntegerField(default=0, verbose_name='количество ответов')
     title = models.CharField(max_length=1024, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     date_create = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     objects = QuestionManager()
 
@@ -62,7 +70,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Автор')
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Вопрос')
     rating = models.IntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
@@ -75,6 +83,34 @@ class Answer(models.Model):
     class Meta:
         verbose_name = 'Ответ'
         verbose_name_plural = 'Ответы'
+
+
+class QuestionLikes(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Автор')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, verbose_name='Вопрос')
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.author
+
+    class Meta:
+        verbose_name = 'Лайк на вопрос'
+        verbose_name_plural = 'Лайки на вопросы'
+
+
+class AnswerLikes(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Автор')
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, verbose_name='Ответ')
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.author
+
+    class Meta:
+        verbose_name = 'Лайк на ответ'
+        verbose_name_plural = 'Лайки на ответы'
 
 
 class Article(models.Model):

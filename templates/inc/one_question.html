@@ -3,6 +3,7 @@
   <div class="card-body row">
     <div class="col-3">
       <img src="{% static 'images/profile.jpg' %}" style="width: 80px">
+      <h6 class='block'>{{question.user.name}}</h6>
       <div class='likes block' style='margin-top: 10px'>
        <a class='inline'>- </a>
        <h6 class='inline'>{{question.rating}} </h6>

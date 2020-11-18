@@ -14,20 +14,20 @@ def paginate(request, object_list, per_page=5):
 
 def index(request):
     questions = Question.objects.new_questions()
-    page_obj = paginate(request, questions)
-    return render(request, 'index.html', {'questions': questions, 'page_obj': page_obj})
+    questions = paginate(request, questions)
+    return render(request, 'index.html', {'questions': questions, 'page_obj': questions})
 
 
 def index_hot(request):
     questions = Question.objects.best_questions()
-    page_obj = paginate(request, questions)
-    return render(request, 'index.html', {'questions': questions, 'page_obj': page_obj})
+    questions = paginate(request, questions)
+    return render(request, 'index.html', {'questions': questions, 'page_obj': questions})
 
 
 def index_by_tag(request, tag):
     questions_ = Question.objects.questions_by_tag(tag)
-    page_obj = paginate(request, questions_)
-    return render(request, 'index.html', {'questions': questions_, 'page_obj': page_obj})
+    questions = paginate(request, questions_)
+    return render(request, 'index.html', {'questions': questions_, 'page_obj': questions})
 
 
 def ask(request):
@@ -51,7 +51,7 @@ def default(request):
 
 
 def question_page(request, no):
-    question_ = Question.objects.filter(identificator=no).first()
-    answers = Answer.objects.filter(question=question_)
-    page_obj = paginate(request, answers)
-    return render(request, 'question.html', {'question': question_, 'answers': answers, 'page_obj': page_obj})
+    question = Question.objects.filter(identificator=no).first()
+    answers = Answer.objects.filter(question=question)
+    answers = paginate(request, answers)
+    return render(request, 'question.html', {'question': question, 'answers': answers, 'page_obj': answers})
