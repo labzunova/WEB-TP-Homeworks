@@ -2,7 +2,11 @@
 {% load static %}
 
     {% block is_authorized %}
-        {% include 'inc/navbar_authorized.html' %}
+        {% if request.user.is_authorized %}
+         {% include 'inc/navbar_authorized.html' %}
+        {% else %}
+         {% include 'inc/navbar_not_authorized.html' %}
+        {% endif %}
     {% endblock is_authorized %}
 
 

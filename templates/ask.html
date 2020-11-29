@@ -1,4 +1,6 @@
 {% extends 'inc/base.html' %}
+
+{% load bootstrap4 %}
 {% load static %}
 
   {% block is_authorized %}
@@ -6,5 +8,11 @@
   {% endblock is_authorized %}
 
   {% block content %}
-    {% include 'inc/ask.html' %}
+    <form class="form mt-5" method="POST" novalidate>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
+    </form>
   {% endblock content %}

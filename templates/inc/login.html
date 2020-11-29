@@ -4,16 +4,8 @@
 <table>
   <tbody>
     <tr>
-      <td>Login</td>
-      <td>
-        <input type='text' maxlength="50" class='inline text_edit'/>
-      </td>
-    </tr>
-    <tr>
-      <td>Password</td>
-      <td>
-        <input type='password' maxlength="30" class='inline text_edit'/>
-      </td>
+      {% csrf_token %}
+      {{ form }}
     </tr>
     <tr>
       <td colspan="2">

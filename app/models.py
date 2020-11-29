@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 class Author(models.Model):
     avatar = models.ImageField(default='askсats/static/images/test.jpg')
