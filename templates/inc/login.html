@@ -1,16 +1,22 @@
 {% load static %}
+{% load bootstrap4 %}
+
 <h2 class='title inline' colspan='2' style='margin-top: 20px;'>Log in</h2>
-<h4 class='inline' style='color:red; margin-left:32px;'>Wrong login or password!</h4>
 <table>
   <tbody>
     <tr>
-      {% csrf_token %}
-      {{ form }}
+    <form class="form" method="POST" action="/login/">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Log in</button>
+        {% endbuttons %}
+    </form>
     </tr>
     <tr>
       <td colspan="2">
-        <input class='add-answer-button' type="submit" value="Log in!" />
-        <a href="#" style='margin-left: 16px;'>Create new account</a>
+        <a href="{% url 'askcats_signup' %}" style='margin-left: 16px;'>Create new account</a>
       </td>
     </tr>
   </tbody>

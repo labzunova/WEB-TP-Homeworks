@@ -1,10 +1,6 @@
 {% extends 'inc/base.html' %}
 {% load static %}
 
-  {% block is_authorized %}
-    {% include 'inc/navbar_authorized.html' %}
-  {% endblock is_authorized %}
-
   {% block content %}
     <h2 class="border_bar_header inline">New questions</h2>
     <a class='inline' href="{% url 'askcats_hot' %}">Hot questions</a>

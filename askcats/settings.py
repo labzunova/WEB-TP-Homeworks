@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'askcats.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'askcats',
+        'NAME': 'cats',
         'USER': 'labzunova',
         'PASSWORD': '1111',
         'HOST': '127.0.0.1',

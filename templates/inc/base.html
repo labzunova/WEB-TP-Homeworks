@@ -10,8 +10,12 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    {% block is_authorized %}
-    {% endblock is_authorized %}
+
+      {% if user.is_authenticated %}
+            {% include 'inc/navbar_authorized.html' %}
+      {% else %}
+            {% include 'inc/navbar_not_authorized.html' %}
+      {% endif %}
 
   <main role="main" class="flex-shrink-0">
     <div class="container">
@@ -37,10 +41,10 @@
             </div>
             <h2 class="border_bar_header" style='margin-top: 32px;'>Best Members</h2>
             <div>
-              <h4>Pushok</h3>
-              <h4>Tomas</h3>
-              <h4>Vasya</h3>
-              <h4>Jessie</h3>
+              <h4>Pushok</h4>
+              <h4>Tomas</h4>
+              <h4>Vasya</h4>
+              <h4>Jessie</h4>
             </div>
           {% endblock right %}
          </div>

@@ -1,15 +1,6 @@
 {% extends 'inc/base.html' %}
 {% load static %}
 
-    {% block is_authorized %}
-        {% if request.user.is_authorized %}
-         {% include 'inc/navbar_authorized.html' %}
-        {% else %}
-         {% include 'inc/navbar_not_authorized.html' %}
-        {% endif %}
-    {% endblock is_authorized %}
-
-
         {% block content %}
           <div class="card" style='margin-top: 20px; margin-bottom: 32px; border-color: #880E4F'>
             <div class="card-body row">
