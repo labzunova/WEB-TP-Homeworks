@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 import random
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from app.models import Question, Answer
+from app.models import Question, Answer, Tag
 from app.models import Author
-from app.forms import LoginForm, AskForm, SignupForm
+from app.forms import LoginForm, AskForm, SignupForm, SettingsForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
@@ -36,10 +36,25 @@ def index_by_tag(request, tag):
 
 @login_required
 def ask(request):
-    return render(request, 'ask.html', {})
+    if request.method == 'GET':
+        form = AskForm()
+    else:
+        form = AskForm(data=request.POST)
+        question = form.save(commit=False)
+        request.author = request.user.author
+        form.instance.user = Author.objects.get(user=request.user)
+        question.identificator = Question.objects.all().count() + 1
+        question.save()
+        tags_ = form.cleaned_data.get("tags")
+        question.tags.add(*tags_)
+        question.save()
+        return redirect(reverse('askcats_question', kwargs={'no': question.identificator}))
+    ctx = {'form': form}
+    return render(request, 'ask.html', ctx)
 
 
 def login(request):
+    page = request.GET.get('stay', '/')
     if request.method == 'GET':
         form = LoginForm()
     else:
@@ -49,7 +64,8 @@ def login(request):
             if user is not None:
                 request.session['hello'] = 'world' # TODO
                 auth.login(request, user)
-                return redirect("/")  # TODO нужны правильные редиректы
+                return redirect(page)
+               # return redirect("/")  # TODO нужны правильные редиректы
             else:
                 form.add_error(None, 'Wrong login or password')
 
@@ -60,32 +76,51 @@ def login(request):
 def signup(request):
     form = SignupForm(data=request.POST)
     if form.is_valid():
-        username = form.cleaned_data.get('login')
+        username_ = form.cleaned_data.get('login')
         email = form.cleaned_data.get('email')
         password1 = form.cleaned_data.get('password1')
         password2 = form.cleaned_data.get('password2')
         if password1 != password2:
             form.add_error(None, 'Passwords do not match!')
-        elif User.objects.is_exist(username, email):
+        elif User.objects.filter(username=username_).exists():
             form.add_error(None, 'This user already exist')
         else:
-            user_ = User.objects.create_user(username, email, password1)
-            User.objects.create(user=user_)
+            user_ = User.objects.create_user(username_, email, password1)
+            Author.objects.create(user=user_, user_name=username_)
             auth.login(request, user_)
             return redirect('/')
-    #varDict.update({'form': form})
     return render(request, 'signup.html', {'form': form})
 
 
 def logout(request):
     auth.logout(request)
-    # next_page = request.GET.get('stay', '/')
-    # return redirect(next_page)
-    return redirect("/login/")
+    page = request.GET.get('stay', '/')
+    return redirect(page)
+   # return redirect("/login/")
 
 
+@login_required
 def settings(request):
-    return render(request, 'settings.html', {})
+    init_data = {'login': request.user.username,
+                 'email': request.user.email}
+    author = Author.objects.filter(user=request.user)[0]
+    form = SettingsForm(init_data, initial=init_data)
+    if request.POST:
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            name_field = form.cleaned_data.get('login')
+            email_field = form.cleaned_data.get('email')
+            password_field = form.cleaned_data.get('email')
+
+            if name_field != request.user.username:
+                if not Author.objects.new_name(author, name_field):
+                    form.add_error(None, 'User with this name already exists')
+
+            if email_field != request.user.email:
+                if not Author.objects.new_email(author, email_field):
+                    form.add_error(None, 'User with this email already exists')
+    return render(request, 'settings.html', {'form': form})
+    # return render(request, 'settings.html', {})
 
 
 def default(request):
@@ -93,7 +128,7 @@ def default(request):
 
 
 def question_page(request, no):
-    question = Question.objects.filter(identificator=no).first()
-    answers = Answer.objects.filter(question=question)
+    question_ = Question.objects.filter(identificator=no).first()
+    answers = Answer.objects.filter(question=question_)
     answers = paginate(request, answers)
-    return render(request, 'question.html', {'question': question, 'answers': answers, 'page_obj': answers})
+    return render(request, 'question.html', {'question': question_, 'answers': answers, 'page_obj': answers})

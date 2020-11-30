@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):
     username = forms.CharField()
-    email = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
 
 
@@ -19,5 +18,10 @@ class SignupForm(forms.Form):
 class AskForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['title', 'text']
+        fields = ['title', 'text', 'tags']
 
+
+class SettingsForm(forms.Form):
+    login = forms.CharField()
+    email = forms.CharField()
+    password = forms.CharField(required=False, widget=forms.PasswordInput())

@@ -1,30 +1,10 @@
+{% load bootstrap4 %}
 <h2 class='title' colspan='2' style='margin-top: 20px;'>New Question</h2>
+<form class="form" method="POST" action="/ask/">
+        {% csrf_token %}
+        {% bootstrap_form form %}
 
-<table>
-  <tbody>
-    <tr>
-      <td>Title</td>
-      <td>
-        <input type='text' maxlength="50" class='inline text_edit'/>
-      </td>
-    </tr>
-    <tr>
-      <td>Text</td>
-      <td>
-       <textarea  maxlength="200" class='inline text_edit' style='height: 200px;'> </textarea>
-     </td>
-   </tr>
-   <tr>
-    <td>Tags</td>
-    <td>
-      <input type='text' maxlength="30" class='inline text_edit'/>
-    </td>
-    <td style='color:red'> maximum is 3 tags</td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <input class='add-question-button' type="submit" value="ASK!"/>
-    </td>
-  </tr>
-</tbody>
-</table>
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Ask!</button>
+        {% endbuttons %}
+</form>

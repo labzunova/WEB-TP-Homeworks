@@ -1,41 +1,15 @@
 {% extends 'inc/base.html' %}
 {% load static %}
+{% load bootstrap4 %}
 
-        {% block content %}
-          <h2 class='title' colspan='2' style='margin-top: 20px;'>Settings</h2>
-          <table>
-          <tbody>
-          <tr>
-            <td>Login</td>
-            <td>
-              <input type='text' maxlength="50" class='inline text_edit'/>
-            </td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td>
-            <input type='text' maxlength="30" class='inline text_edit'/>
-            </td>
-         </tr>
-         <tr>
-            <td>Nickname</td>
-            <td>
-            <input type='text' maxlength="30" class='inline text_edit'/>
-            </td>
-         </tr>
-         <tr>
-            <td>Upload avatar</td>
-            <td>
-              <img src='{% static "images/profile.jpg" %}' class='inline' style="width: 80px">
-              <input class='add-answer-button' type="submit" value="choose" />
-            </td>
-         </tr>
-         <tr>
-            <td colspan="2">
-              <input class='add-question-button' type="submit" value="Save" />
-            </td>
-         </tr>
-        </tbody>
-        </table>
-        {% endblock content %}
+{% block content %}
+    <form class="form" method="POST" action="/settings/">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type="submit" class="page_btn btn btn-outline-secondary">Save</button>
+        {% endbuttons %}
+    </form>
+{% endblock content %}
 

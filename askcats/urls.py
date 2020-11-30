@@ -29,5 +29,5 @@ urlpatterns = [
     path('logout/', views.logout, name='askcats_logout'),
     path('question/<int:no>/', views.question_page, name='askcats_question'),
     path('settings/', views.settings, name='askcats_settings'),
-    path('', views.default),
+    path('', views.index),
 ]

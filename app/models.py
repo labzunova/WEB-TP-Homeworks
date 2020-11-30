@@ -3,10 +3,35 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class SettingsManager(models.Manager):
+    def new_name(self, author_, new_name):
+        if User.objects.filter(username=new_name).count():
+            return False
+        author_.user.username = new_name
+        author_.user.save()
+        author_.user_name = new_name
+        author_.save()
+        return True
+
+    def new_email(self, author_, new_email):
+        if User.objects.filter(email=new_email).count():
+            return False
+        author_.user.email = new_email
+        author_.user.save()
+        return True
+
+    def is_exist(self, name, email):
+        if self.is_email_taken(email):
+            return True
+        return self.is_name_taken(name)
+
+
 class Author(models.Model):
     #identificator = models.IntegerField(verbose_name='id юзера', default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=256, verbose_name='Имя', default='null')
     avatar = models.ImageField(default='askсats/static/images/test.jpg')
+    objects = SettingsManager()
 
     def __str__(self):
         return self.user_name
