@@ -12,7 +12,7 @@
          <h4 class ='profile_box'>Welcome!</h4>
          <div class="navbar-right-links">
            <a class="nav-link inline profile_box" href="{% url 'askcats_signup' %}">sign up</a>
-           <a class="nav-link inline profile_box" href="{% url 'askcats_login' %}">log in</a>
+           <a class="nav-link inline profile_box" href="{% url 'askcats_login' %}?continue={{ request.path }}">log in</a>
          </div>
       </div>
     </nav>

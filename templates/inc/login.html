@@ -5,7 +5,7 @@
 <table>
   <tbody>
     <tr>
-    <form class="form" method="POST" action="/login/">
+    <form class="form" method="POST" action="?continue={{ redirect_to }}">
         {% csrf_token %}
         {% bootstrap_form form %}
 

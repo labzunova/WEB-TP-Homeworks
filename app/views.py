@@ -1,10 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
 import random
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from app.models import Question, Answer, Tag
 from app.models import Author
-from app.forms import LoginForm, AskForm, SignupForm, SettingsForm
+from app.forms import LoginForm, AskForm, SignupForm, SettingsForm, AnswerForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
@@ -41,7 +42,7 @@ def ask(request):
     else:
         form = AskForm(data=request.POST)
         question = form.save(commit=False)
-        request.author = request.user.author
+        question.author = request.user.author
         form.instance.user = Author.objects.get(user=request.user)
         question.identificator = Question.objects.all().count() + 1
         question.save()
@@ -54,22 +55,23 @@ def ask(request):
 
 
 def login(request):
-    page = request.GET.get('stay', '/')
+    page = request.GET.get('stay', '/')  # TODO
     if request.method == 'GET':
         form = LoginForm()
     else:
+        redirect_to = request.GET.get('continue', '/')
         form = LoginForm(data=request.POST)
         if form.is_valid():
             user = auth.authenticate(request, **form.cleaned_data)
             if user is not None:
-                request.session['hello'] = 'world' # TODO
+                request.session['hello'] = 'world'  # TODO
                 auth.login(request, user)
-                return redirect(page)
-               # return redirect("/")  # TODO нужны правильные редиректы
+                return redirect(redirect_to)
+            # return redirect("/")  # TODO нужны правильные редиректы
             else:
                 form.add_error(None, 'Wrong login or password')
-
-    ctx = {'form': form}
+    redirect_to = request.GET.get('continue', '/')
+    ctx = {'form': form, 'redirect_to': redirect_to}
     return render(request, 'login.html', ctx)
 
 
@@ -96,7 +98,9 @@ def logout(request):
     auth.logout(request)
     page = request.GET.get('stay', '/')
     return redirect(page)
-   # return redirect("/login/")
+
+
+# return redirect("/login/")
 
 
 @login_required
@@ -129,6 +133,17 @@ def default(request):
 
 def question_page(request, no):
     question_ = Question.objects.filter(identificator=no).first()
+    if request.method == 'GET':
+        form = AnswerForm()
+    else:
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.author = request.user.author
+            answer.save()
+            page = int(question_.answer_set.count() / 5) + 1
+        return redirect(request.path + '?page=' + str(page) + '#' + str(answer.id))
     answers = Answer.objects.filter(question=question_)
     answers = paginate(request, answers)
-    return render(request, 'question.html', {'question': question_, 'answers': answers, 'page_obj': answers})
+    return render(request, 'question.html',
+                  {'question': question_, 'answers': answers, 'page_obj': answers, 'form': form})

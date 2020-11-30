@@ -1,5 +1,5 @@
 from django import forms
-from app.models import Question, Author
+from app.models import Question, Author, Answer
 from django.contrib.auth.models import User
 
 
@@ -19,6 +19,15 @@ class AskForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'text', 'tags']
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['text']
+        labels = {
+            "text": "Your answer",
+        }
 
 
 class SettingsForm(forms.Form):
