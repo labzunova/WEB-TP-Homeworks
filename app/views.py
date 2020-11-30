@@ -140,7 +140,10 @@ def question_page(request, no):
         if form.is_valid():
             answer = form.save(commit=False)
             answer.author = request.user.author
+            form.instance.question = Question.objects.get(identificator=no)
             answer.save()
+            question_.answers_count += 1
+            question_.save(update_fields=['answers_count'])
             page = int(question_.answer_set.count() / 5) + 1
         return redirect(request.path + '?page=' + str(page) + '#' + str(answer.id))
     answers = Answer.objects.filter(question=question_)
