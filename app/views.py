@@ -44,7 +44,7 @@ def ask(request):
         question = form.save(commit=False)
         question.author = request.user.author
         form.instance.user = Author.objects.get(user=request.user)
-        question.identificator = Question.objects.all().count() + 1
+        question.identificator = Question.objects.all().count() + 1  # TODO
         question.save()
         tags_ = form.cleaned_data.get("tags")
         question.tags.add(*tags_)
@@ -63,30 +63,24 @@ def login(request):
         form = LoginForm(data=request.POST)
         if form.is_valid():
             user = auth.authenticate(request, **form.cleaned_data)
-            if user is not None:
-                request.session['hello'] = 'world'  # TODO
-                auth.login(request, user)
-                return redirect(redirect_to)
-            # return redirect("/")  # TODO нужны правильные редиректы
-            else:
-                form.add_error(None, 'Wrong login or password')
+            request.session['hello'] = 'world'  # TODO
+            auth.login(request, user)
+            return redirect(redirect_to)
+
     redirect_to = request.GET.get('continue', '/')
     ctx = {'form': form, 'redirect_to': redirect_to}
     return render(request, 'login.html', ctx)
 
 
 def signup(request):
-    form = SignupForm(data=request.POST)
-    if form.is_valid():
-        username_ = form.cleaned_data.get('login')
-        email = form.cleaned_data.get('email')
-        password1 = form.cleaned_data.get('password1')
-        password2 = form.cleaned_data.get('password2')
-        if password1 != password2:
-            form.add_error(None, 'Passwords do not match!')
-        elif User.objects.filter(username=username_).exists():
-            form.add_error(None, 'This user already exist')
-        else:
+    if request.method == 'GET':
+        form = SignupForm()
+    else:
+        form = SignupForm(data=request.POST)
+        if form.is_valid():
+            username_ = form.cleaned_data.get('login')
+            email = form.cleaned_data.get('email')
+            password1 = form.cleaned_data.get('password1')
             user_ = User.objects.create_user(username_, email, password1)
             Author.objects.create(user=user_, user_name=username_)
             auth.login(request, user_)
@@ -112,19 +106,17 @@ def settings(request):
     if request.POST:
         form = SettingsForm(request.POST)
         if form.is_valid():
-            name_field = form.cleaned_data.get('login')
+            username_field = form.cleaned_data.get('login')
             email_field = form.cleaned_data.get('email')
-            password_field = form.cleaned_data.get('email')
+            user_ = request.user
+            user_.username = username_field
+            author.user_name = username_field
+            user_.email = email_field
+            author.save()
+            user_.save()
+            # password_field = form.cleaned_data.get('email')
 
-            if name_field != request.user.username:
-                if not Author.objects.new_name(author, name_field):
-                    form.add_error(None, 'User with this name already exists')
-
-            if email_field != request.user.email:
-                if not Author.objects.new_email(author, email_field):
-                    form.add_error(None, 'User with this email already exists')
     return render(request, 'settings.html', {'form': form})
-    # return render(request, 'settings.html', {})
 
 
 def default(request):

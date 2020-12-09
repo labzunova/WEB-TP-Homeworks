@@ -113,6 +113,7 @@ class QuestionLikes(models.Model):
     class Meta:
         verbose_name = 'Лайк на вопрос'
         verbose_name_plural = 'Лайки на вопросы'
+        unique_together = ['question', 'author']
 
 
 class AnswerLikes(models.Model):
@@ -127,6 +128,4 @@ class AnswerLikes(models.Model):
     class Meta:
         verbose_name = 'Лайк на ответ'
         verbose_name_plural = 'Лайки на ответы'
-
-
-# Create your models here.
+        unique_together = ['answer', 'author']
