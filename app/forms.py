@@ -44,6 +44,7 @@ class AskForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'text', 'tags']
+
     error_messages = {'title': {'required': 'Enter a title'},
                       'text': {'required': 'Enter a question text'}}
 
@@ -57,9 +58,13 @@ class AnswerForm(forms.ModelForm):
         }
 
 
-class SettingsForm(forms.Form):
+class SettingsForm(forms.ModelForm):
     login = forms.CharField()
-    email = forms.CharField()
+    email = forms.EmailField()
+
+    class Meta:
+        model = Author
+        fields = ['avatar']
 
     def clean(self):
         cleaned_data = super(SettingsForm, self).clean()

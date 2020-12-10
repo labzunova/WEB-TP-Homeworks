@@ -104,16 +104,19 @@ def settings(request):
     author = Author.objects.filter(user=request.user)[0]
     form = SettingsForm(init_data, initial=init_data)
     if request.POST:
-        form = SettingsForm(request.POST)
+        form = SettingsForm(request.POST, files=request.FILES,
+                            instance=request.user.author)
         if form.is_valid():
             username_field = form.cleaned_data.get('login')
             email_field = form.cleaned_data.get('email')
             user_ = request.user
             user_.username = username_field
             author.user_name = username_field
+            author.avatar = form.cleaned_data('avatar')
             user_.email = email_field
             author.save()
             user_.save()
+            form.save()
             # password_field = form.cleaned_data.get('email')
 
     return render(request, 'settings.html', {'form': form})

@@ -12,7 +12,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
   <div class ='ml-auto'>
-      <img src='{% static "images/profile.jpg" %}' class='inline' style="width: 52px">
+      <img src= "{{ user.author.avatar.url }}" class='inline img rounded' style="width: 52px">
       <div class = 'inline'>
         <h4 class ='profile_box'>{{user.username}}</h4>
         <div class="navbar-right-links">

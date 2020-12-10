@@ -30,7 +30,7 @@ class Author(models.Model):
     #identificator = models.IntegerField(verbose_name='id юзера', default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=256, verbose_name='Имя', default='null')
-    avatar = models.ImageField(default='askсats/static/images/test.jpg')
+    avatar = models.ImageField(default='askсats/static/images/test.jpg', upload_to='avatar/%Y/%m/%d/', verbose_name="avatar")
     objects = SettingsManager()
 
     def __str__(self):

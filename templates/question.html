@@ -6,7 +6,7 @@
           <div class="card" style='margin-top: 20px; margin-bottom: 32px; border-color: #880E4F'>
             <div class="card-body row">
               <div class="col-3">
-                <img src='{% static "images/profile.jpg" %}' style="width: 100px">
+                <img src='{{ question.user.author.avatar.url }}' style="width: 100px">
                 <h5 class='block' style="margin-top:4px; margin-left:8px;">{{question.user.user_name}}</h5>
                 <div class='likes block' style='margin-top: 10px'>
                  <a class='inline'>- </a>
