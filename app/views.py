@@ -99,24 +99,41 @@ def logout(request):
 
 @login_required
 def settings(request):
-    init_data = {'login': request.user.username,
-                 'email': request.user.email}
-    author = Author.objects.filter(user=request.user)[0]
-    form = SettingsForm(init_data, initial=init_data)
+    if request.method == 'GET':
+        form = SettingsForm(data={
+            'login': request.user.username,
+            'email': request.user.email
+        })
     if request.POST:
-        form = SettingsForm(request.POST, files=request.FILES,
+        form = SettingsForm(data=request.POST, files=request.FILES,
                             instance=request.user.author)
         if form.is_valid():
+            post = form.save(commit=False)
             username_field = form.cleaned_data.get('login')
             email_field = form.cleaned_data.get('email')
             user_ = request.user
             user_.username = username_field
+            author = Author.objects.filter(user=request.user)[0]
             author.user_name = username_field
-            author.avatar = form.cleaned_data('avatar')
+            author.avatar = form.cleaned_data.get('avatar')
             user_.email = email_field
             author.save()
             user_.save()
             form.save()
+
+            # author = request.user.author
+            # request.user.author.delete()
+            # author = Author(
+            #     user=request.user,
+            #     avatar=form.cleaned_data.get('avatar'),
+            #     user_name=request.user.username
+            # )
+            #
+            # author.save()
+            #
+            # request.user.username = request.POST['username']
+            # request.user.email = request.POST['email']
+            # request.user.save()
             # password_field = form.cleaned_data.get('email')
 
     return render(request, 'settings.html', {'form': form})
