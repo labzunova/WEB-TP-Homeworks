@@ -108,33 +108,37 @@ def settings(request):
         form = SettingsForm(data=request.POST, files=request.FILES,
                             instance=request.user.author)
         if form.is_valid():
-            post = form.save(commit=False)
-            username_field = form.cleaned_data.get('login')
-            email_field = form.cleaned_data.get('email')
-            user_ = request.user
-            user_.username = username_field
-            author = Author.objects.filter(user=request.user)[0]
-            author.user_name = username_field
-            author.avatar = form.cleaned_data.get('avatar')
-            user_.email = email_field
-            author.save()
-            user_.save()
+            form.save()
+            return redirect(reverse('settings'))
+            # post = form.save(commit=False)
+            # username_field = form.cleaned_data.get('login')
+            # email_field = form.cleaned_data.get('email')
+            # author = request.user.author
+            # author.user_name = username_field
+            # author.avatar = request.FILES.get('avatar', request.user.author.avatar)
+            # author.save()
+            #
+            # user_ = request.user
+            # user_.username = username_field
+            # user_.email = email_field
+            # user_.save()
+            #
             form.save()
 
             # author = request.user.author
             # request.user.author.delete()
             # author = Author(
             #     user=request.user,
-            #     avatar=form.cleaned_data.get('avatar'),
-            #     user_name=request.user.username
+            #     avatar=request.FILES.get('avatar', request.user.author.avatar),
+            #     user_name=request.POST['login']
             # )
             #
             # author.save()
             #
-            # request.user.username = request.POST['username']
+            # request.user.username = request.POST['login']
             # request.user.email = request.POST['email']
             # request.user.save()
-            # password_field = form.cleaned_data.get('email')
+            # form.save()
 
     return render(request, 'settings.html', {'form': form})
 
