@@ -1,3 +1,4 @@
+from PIL import Image
 from django import forms
 from app.models import Question, Author, Answer
 from django.contrib.auth.models import User
@@ -21,7 +22,7 @@ class LoginForm(forms.Form):
 
 class SignupForm(forms.Form):
     login = forms.CharField()
-    email = forms.CharField()
+    email = forms.EmailField()
     password1 = forms.CharField(widget=forms.PasswordInput())
     password2 = forms.CharField(widget=forms.PasswordInput())
 
@@ -64,12 +65,12 @@ class SettingsForm(forms.ModelForm):
 
     class Meta:
         model = Author
-        fields = ['avatar']
+        fields = ["avatar"]
 
-    def clean(self):
-        cleaned_data = super(SettingsForm, self).clean()
-        if User.objects.filter(username=cleaned_data['login']).exists():
-            raise forms.ValidationError('User with this login already exists')
-        if User.objects.filter(email=cleaned_data['email']).exists():
-            raise forms.ValidationError('User with this email already exists')
-        return cleaned_data
+    # def clean(self):
+    #     cleaned_data = super(SettingsForm, self).clean()
+    #     if User.objects.filter(username=cleaned_data['login']).exists():
+    #         raise forms.ValidationError('User with this login already exists')
+    #     if User.objects.filter(email=cleaned_data['email']).exists():
+    #         raise forms.ValidationError('User with this email already exists')
+    #     return cleaned_data

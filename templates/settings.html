@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <form class="form" method="POST" action="/settings/" enctype="multipart/form-data" novalidate>
+    <form class="form" method="POST" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         {% bootstrap_form form %}
 
