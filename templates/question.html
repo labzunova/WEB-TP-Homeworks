@@ -9,10 +9,9 @@
                 <img src='{{ question.user.avatar.url }}' style="width: 100px">
                 <h5 class='block' style="margin-top:4px; margin-left:8px;">{{question.user.user_name}}</h5>
                 <div class='likes block' style='margin-top: 10px'>
-                 <a class='inline'>- </a>
-                 <h6 class='inline'>{{question.rating}} </h6>
-                 <img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px">
-                 <a class='inline'> +</a>
+                 <a class='inline'><img src="{% static 'images/dislike.png' %}" class='inline' style="width: 20px"> </a>
+                 <h6 class='inline' style="margin-top:8px">{{question.rating}} </h6>
+                 <a class='inline'><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
                 </div>
               </div>
               <div class="col-9">

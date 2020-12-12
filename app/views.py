@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from app.models import Question, Answer, Tag
 from app.models import Author
@@ -147,3 +149,13 @@ def question_page(request, no):
     answers = paginate(request, answers)
     return render(request, 'question.html',
                   {'question': question_, 'answers': answers, 'page_obj': answers, 'form': form})
+
+
+@require_POST
+@login_required
+def vote(request):
+    data = request.POST
+    from pprint import pformat
+    print(f'HERE: {pformat(data)}')
+    # TODO обработка лайков
+    return JsonResponse(data)  # TODO вернуть кол-во лайков

@@ -5,10 +5,9 @@
 			<img src='{{ answer.author.avatar.url }}' style="width: 80px">
 			<h6 class='block' style="margin_top: 4 px">{{answer.author.user_name}}</h6>
 			<div class='likes block' style='margin-top: 10px'>
-			   <a class='inline'>- </a>
-			   <h6 class='inline'>{{answer.rating}} </h6>
-			   <img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px">
-			   <a class='inline'> +</a>
+				<a class='inline'><img src="{% static 'images/dislike.png' %}" class='inline' style="width: 20px"> </a>
+       			<h6 class='inline' style="margin-top:8px">{{answer.rating}} </h6>
+       			<a class='inline'><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
 			</div>
 		</div>
 		<div class="col-9">

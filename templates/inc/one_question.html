@@ -5,10 +5,9 @@
       <img src="{{ question.user.avatar.url }}" style="width: 80px">
       <h6 class='block'>{{question.user.user_name}}</h6>
       <div class='likes block' style='margin-top: 10px'>
-       <a class='inline'>- </a>
-       <h6 class='inline'>{{question.rating}} </h6>
-       <a><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
-       <a class='inline'> +</a>
+       <a class='inline js-vote' href="#" data-action="like" data-qid="{{ question.identificator}}"><img src="{% static 'images/dislike.png' %}" class='inline' style="width: 20px"> </a>
+       <h6 class='inline' style="margin-top:8px">{{question.rating}} </h6>
+       <a class='inline js-vote' href="#" data-action="dislike" data-qid="{{ question.identificator}}"><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
      </div>
    </div>
    <div class="col-9">
@@ -18,9 +17,8 @@
     <div class='card-tags'>
       <h6 class='inline' style='margin-top: 7px;'>Tags: </h6>
       {% for tag in question.tags.all %}
-                 <a href="{% url 'askcats_index_by_tag' tag.title %}" class="badge badge-pill  badge-warning">{{ tag.title }}</a>
+         <a href="{% url 'askcats_index_by_tag' tag.title %}" class="badge badge-pill  badge-warning">{{ tag.title }}</a>
       {% endfor %}
-    </a>
     </div>
   </div>
 </div>
