@@ -165,11 +165,11 @@ def vote(request):
                 author=request.user.author
             )
     else:
-        entity = Answer.objects.filter(identificator=data['id']).first()
-        votion = AnswerLikes.objects.filter(answer=entity, author=request.user.author   ).first()
+        entity = Answer.objects.filter(pk=data['id']).first()
+        votion = AnswerLikes.objects.filter(answer=entity, author=request.user.author).first()
         if votion is None:
             votion = AnswerLikes.objects.create(
-                question=entity,
+                answer=entity,
                 author=request.user.author
             )
 
