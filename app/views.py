@@ -203,3 +203,22 @@ def vote(request):
     from pprint import pformat
     print(f'HERE: {pformat(response)}')
     return JsonResponse(response)
+
+
+@require_POST
+@login_required
+def correct(request):
+    data = request.POST
+    answer = Answer.objects.filter(pk=data["aid"]).first()
+    user = request.user.author
+    old_right_ans = Answer.objects.filter(question__identificator=data["qid"], is_right=True).first()
+    old_correct = ""
+    if old_right_ans is None:
+        answer.is_right = True
+    else:
+        old_right_ans.is_right = False
+        old_correct = old_right_ans.pk
+        answer.is_right = True
+        old_right_ans.save()
+    answer.save()
+    return JsonResponse({"old_correct": old_correct})

@@ -33,5 +33,6 @@ urlpatterns = [
     path('question/<int:no>/', views.question_page, name='askcats_question'),
     path('settings/', views.settings, name='askcats_settings'),
     path('vote/', views.vote, name='askcats_vote'),
+    path('correct/', views.correct, name='askcats_correct'),
     path('', views.index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
