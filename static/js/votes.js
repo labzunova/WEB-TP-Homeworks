@@ -5,7 +5,7 @@ $('.js-vote').click(function(ev){
         action = $this.data('action')
         type = $this.data('type')
         id = $this.data('id')
-    $.ajax('/vote_q/', {
+    $.ajax('/vote/', {
         method: 'POST',
         data: {
             action: action,
@@ -13,7 +13,7 @@ $('.js-vote').click(function(ev){
             id: id,
         },
     }).done(function(data){
-        console.log("DATA " + data);
+        console.log("rating " + data.rating);
         $('#rating-' + id).text(data.rating);
     });
     console.log("hello " + action + " " + id);

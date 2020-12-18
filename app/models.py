@@ -107,7 +107,7 @@ class QuestionLikes(models.Model):
     vote = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.author
+        return self.author.user_name + " on " + self.question.title
 
     class Meta:
         verbose_name = 'Лайк на вопрос'
@@ -121,7 +121,7 @@ class AnswerLikes(models.Model):
     vote = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.author
+        return self.author.user_name + " on ans for " + self.answer.question.title
 
     class Meta:
         verbose_name = 'Лайк на ответ'

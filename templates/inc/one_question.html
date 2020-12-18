@@ -1,13 +1,14 @@
 {% load static %}
+{% csrf_token %}
 <div class="card" style='margin-top: 20px;'>
   <div class="card-body row">
     <div class="col-3">
       <img src="{{ question.user.avatar.url }}" style="width: 80px">
       <h6 class='block'>{{question.user.user_name}}</h6>
       <div class='likes block' style='margin-top: 10px'>
-       <a class='inline js-vote' href="#" data-action="like" data-type="question" data-id="{{ question.identificator }}"><img src="{% static 'images/dislike.png' %}" class='inline' style="width: 20px"> </a>
-       <h6 class='inline' style="margin-top:8px" id="rating-{{ question.identificator }}">>{{question.rating}} </h6>
-       <a class='inline js-vote' href="#" data-action="dislike" data-type="question" data-id="{{ question.identificator }}"><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
+       <a class='inline js-vote' href="#" data-action="dislike" data-type="question" data-id="{{ question.identificator }}"><img src="{% static 'images/dislike.png' %}" class='inline' style="width: 20px"> </a>
+       <h6 class='inline' style="margin-top:8px" id="rating-{{ question.identificator }}"> {{question.rating}} </h6>
+       <a class='inline js-vote' href="#" data-action="like" data-type="question" data-id="{{ question.identificator }}"><img src="{% static 'images/like.png' %}"  class='inline' style="width: 20px"></a>
      </div>
    </div>
    <div class="col-9">

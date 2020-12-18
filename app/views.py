@@ -157,20 +157,20 @@ def question_page(request, no):
 def vote(request):
     data = request.POST
     if data['type'] == "question":
-        entity = Question.objects.get(identificator=data['id'])
-        votion = QuestionLikes.objects.filter(question=entity)
-        if votion == None:
-            votion = QuestionLikes.create(
+        entity = Question.objects.filter(identificator=data['id']).first()
+        votion = QuestionLikes.objects.filter(question=entity, author=request.user.author).first()
+        if votion is None:
+            votion = QuestionLikes.objects.create(
                 question=entity,
-                author=entity.user
+                author=request.user.author
             )
     else:
-        entity = Answer.objects.get(identificator=data['id'])
-        votion = AnswerLikes.objects.filter(answer=entity)
-        if votion == None:
-            votion = AnswerLikes.create(
+        entity = Answer.objects.filter(identificator=data['id']).first()
+        votion = AnswerLikes.objects.filter(answer=entity, author=request.user.author   ).first()
+        if votion is None:
+            votion = AnswerLikes.objects.create(
                 question=entity,
-                author=entity.autor
+                author=request.user.author
             )
 
     if data['action'] == "like":
@@ -190,13 +190,15 @@ def vote(request):
             votion.vote = 0
             entity.rating = entity.rating + 1
         elif votion.vote == 0:  # просто поставить дизлайк, если его еще нет
-            votion.vote = 1
+            votion.vote = -1
             entity.rating = entity.rating - 1
         elif votion.vote == 1:  # отменить лайк и поставить дис
             votion.vote = -1
             entity.rating = entity.rating - 2
         else:
             return JsonResponse({"error": "smth went wrong"})
+    votion.save()
+    entity.save()
     response = {"rating": entity.rating}
     from pprint import pformat
     print(f'HERE: {pformat(response)}')
