@@ -104,8 +104,7 @@ class Answer(models.Model):
 class QuestionLikes(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, verbose_name='Автор')
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, verbose_name='Вопрос')
-    like = models.IntegerField(default=0)
-    dislike = models.IntegerField(default=0)
+    vote = models.IntegerField(default=0)
 
     def __str__(self):
         return self.author
@@ -119,8 +118,7 @@ class QuestionLikes(models.Model):
 class AnswerLikes(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, verbose_name='Автор')
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, verbose_name='Ответ')
-    like = models.IntegerField(default=0)
-    dislike = models.IntegerField(default=0)
+    vote = models.IntegerField(default=0)
 
     def __str__(self):
         return self.author

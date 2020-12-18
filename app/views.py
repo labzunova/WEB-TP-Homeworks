@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from app.models import Question, Answer, Tag
 from app.models import Author
+from app.models import QuestionLikes, AnswerLikes
 from app.forms import LoginForm, AskForm, SignupForm, SettingsForm, AnswerForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -155,7 +156,48 @@ def question_page(request, no):
 @login_required
 def vote(request):
     data = request.POST
+    if data['type'] == "question":
+        entity = Question.objects.get(identificator=data['id'])
+        votion = QuestionLikes.objects.filter(question=entity)
+        if votion == None:
+            votion = QuestionLikes.create(
+                question=entity,
+                author=entity.user
+            )
+    else:
+        entity = Answer.objects.get(identificator=data['id'])
+        votion = AnswerLikes.objects.filter(answer=entity)
+        if votion == None:
+            votion = AnswerLikes.create(
+                question=entity,
+                author=entity.autor
+            )
+
+    if data['action'] == "like":
+        if votion.vote == -1:  # отменить дизлайк + поставить лайк
+            votion.vote = 1
+            entity.rating = entity.rating + 2
+        elif votion.vote == 0:  # просто поставить лайк, если его еще нет
+            votion.vote = 1
+            entity.rating = entity.rating + 1
+        elif votion.vote == 1:  # отменить лайк
+            votion.vote = 0
+            entity.rating = entity.rating - 1
+        else:
+            return JsonResponse({"error": "smth went wrong"})
+    elif data['action'] == "dislike":
+        if votion.vote == -1:  # отменить дизлайк
+            votion.vote = 0
+            entity.rating = entity.rating + 1
+        elif votion.vote == 0:  # просто поставить дизлайк, если его еще нет
+            votion.vote = 1
+            entity.rating = entity.rating - 1
+        elif votion.vote == 1:  # отменить лайк и поставить дис
+            votion.vote = -1
+            entity.rating = entity.rating - 2
+        else:
+            return JsonResponse({"error": "smth went wrong"})
+    response = {"rating": entity.rating}
     from pprint import pformat
-    print(f'HERE: {pformat(data)}')
-    # TODO обработка лайков
-    return JsonResponse(data)  # TODO вернуть кол-во лайков
+    print(f'HERE: {pformat(response)}')
+    return JsonResponse(response)
